@@ -8,22 +8,29 @@
 
   <div id="app" class="ui container">
     <h1>Notification Center</h1>
-    
-    <!-- Notification Message Markup -->
-    <!-- Types: info, warning, error, success -->
-    <div class="ui info message">
-      <i class="close icon"></i>
-      <div class="header">
-        You are eligible for a reward
-      </div>
-      <p>Go to the <b>special offers</b> page to see now.</p>
-    </div>
+    <notification-message 
+      v-if="open"
+      type="error" 
+      header="Oh no"
+      @close="open = false"
+      >
+      <p>Your flight has been <b>canceled</b></p>
+    </notification-message>
 
   </div>
 
   <!-- Template for Notification Message -->
   <script type="text/x-template" id="notification-message-template">
-  
+    
+    <!-- Notification Message Markup -->
+    <!-- Types: info, warning, error, success -->
+    <div :class="type" class="ui message">
+      <i class="close icon" @click="$emit('close')"></i>
+      <div class="header">
+        {{ header }}
+      </div>
+      <slot />
+    </div>  
   </script>
 
   <!-- Import Vue.js -->
@@ -31,7 +38,20 @@
 
   <!-- Your JavaScript Code :) -->
   <script>
-    Vue.createApp({}).mount('#app')
+    let NotificationMessageComponent = {
+      template: '#notification-message-template',
+      props: ['type', 'header']
+    }
+
+    Vue.createApp({
+      components: {'notification-message': NotificationMessageComponent},
+      
+      data(){
+        return {
+          open: true
+        }
+      }
+    }).mount('#app')
   </script>
 </body>
 
