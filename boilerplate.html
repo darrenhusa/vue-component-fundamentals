@@ -10,57 +10,41 @@
   <div id="app"
        class="ui container">
     <h1>GitHub Profiles</h1>
-    {{me}}
+    <!-- {{me}} -->
     <github-user-card username="danielkellyio"></github-user-card>
+    <!-- <github-user-card username="darrenhusa"></github-user-card> -->
 
-  <!-- Import Vue.js and axios -->
+  </div>
+
+    <script type="text/x-template" id="github-user-card-template">
+      <!-- Template for GitHub card -->
+      <div class="ui card">
+          <div class="image">
+            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png">
+          </div>
+          <div class="content">
+            <a :href="profile_url" class="header">{{ name }}</a>
+            <div class="meta">
+                <span class="date">Joined in {{ year_joined }}</span>
+            </div>
+            <div class="description">
+                {{ bio }}
+            </div>
+          </div>
+          <div class="extra content">
+            <a :href="followers_url">
+                <i class="user icon"></i>
+                {{ followers }} Friends
+            </a>
+          </div>
+      </div>
+    </script>
+    
+    <!-- Import Vue.js and axios -->
   <script src="https://unpkg.com/vue@3"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <!-- Your JavaScript Code :) -->
-  <script type="text/x-template" id="github-user-card-template">
-
-    <!-- Template for GitHub card -->
-    <div class="ui card">
-        <div class="image">
-        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png">
-        </div>
-        <div class="content">
-        <a class="header">Kristy</a>
-        <div class="meta">
-            <span class="date">Joined in 2013</span>
-        </div>
-        <div class="description">
-            Kristy is an art director living in New York.
-        </div>
-        </div>
-        <div class="extra content">
-        <a>
-            <i class="user icon"></i>
-            22 Friends
-        </a>
-        </div>
-    </div>
-    </div>
-  </script>
-  
-  <script>
-    Vue.createApp({})
-    .component('github-user-card', {
-        template: '#github-user-card-template',
-        
-        data() {
-            return {
-
-            }
-        },
-
-        created() {
-
-        }
-    })
-    .mount('#app')
-  </script>
+  <script src="app.js"></script>
 </body>
 
 </html>
